@@ -1,0 +1,12 @@
+package pages
+
+import "strconv"
+
+templ Counter(count int) {
+	<div>
+		<h1>Counter</h1>
+		<p>Count: <span id="counter">{ strconv.Itoa(count) }</span></p>
+		<button hx-put="/count/increment" hx-target="#counter" hx-swap="innterHTML">Increment</button>
+		<button hx-put="/count/decrement" hx-target="#counter" hx-swap="innerHTML">Decrement</button>
+	</div>
+}
