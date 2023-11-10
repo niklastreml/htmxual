@@ -77,4 +77,16 @@ func (t *TodoHandler) Update(c *gin.Context) {
 	c.HTML(200, "", pages.TodoItem(todo))
 
 }
-func (t *TodoHandler) Remove(c *gin.Context) {}
+func (t *TodoHandler) Remove(c *gin.Context) {
+	id := c.Param("id")
+
+	idint, err := strconv.Atoi(id)
+	if err != nil {
+		c.AbortWithError(400, err)
+		return
+	}
+
+	t.ts.Remove(idint)
+
+	c.Status(200)
+}

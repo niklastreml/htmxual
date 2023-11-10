@@ -6,19 +6,16 @@ import "fmt"
 templ TodoList(todos []*services.Todo) {
 	<div class="flex justify-around">
 		<div class="flex justify-center flex-col">
-			<h1 class="text-6xl mb-10 mt-1">Todo List</h1>
+			<h1 class="text-6xl mb-10 mt-1 text-center">Todo List</h1>
 			<ul id="todolist">
 				for _, todo := range todos {
 					@TodoItem(todo)
 				}
 			</ul>
-			<hr
- 				class="my-3 h-px border-t-0 bg-gray-400 dark:bg-gray-700 opacity-100 mx-2"
-			/>
-			<form hx-post="/todo" hx-trigger="submit" hx-swap="beforeend" hx-target="#todolist" onsubmit="event.preventDefault()" hx-on::after-request="this.reset()" class="mt-5">
-				<div class="pl-3 dark:bg-gray-700 rounded">
+			<form hx-post="/todo" hx-trigger="submit" hx-swap="beforeend" hx-target="#todolist" onsubmit="event.preventDefault()" hx-on::after-request="this.reset()" class="mt-8">
+				<div class="pl-3">
 					<button class="dark:text-gray-50 text-xl"><b>+</b></button>
-					<input type="text" name="title" placeholder="Title" class="rounded p-1 bg-transparent p-1 outline-none border-b focus:border-gray-300 rounded-none "/>
+					<input type="text" name="title" placeholder="New Todo..." class="rounded p-1 bg-transparent p-1 outline-none focus:border-b focus:border-gray-300 rounded-none "/>
 				</div>
 			</form>
 		</div>
@@ -26,12 +23,12 @@ templ TodoList(todos []*services.Todo) {
 }
 
 templ TodoItem(todo *services.Todo) {
-	<li class="mb-1 list-none">
-		<form hx-put={ fmt.Sprintf("/todo/%d", todo.Id) } id={ fmt.Sprintf("todoitem-%d", todo.Id) } hx-trigger="change once" onsubmit="event.preventDefault()">
-			<div class="pl-3 dark:bg-gray-700 rounded">
-				// <input type="checkbox" class="px-3 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" checked?={ todo.Done } name="done"/>
-				<input type="checkbox" class="accent-black focus:accent-pink-500 " checked?={ todo.Done } name="done"/>
+	<li class="mb-1 list-none" id={ fmt.Sprintf("todoitem-%d", todo.Id) }>
+		<form hx-put={ fmt.Sprintf("/todo/%d", todo.Id) } hx-trigger="change once" onsubmit="event.preventDefault()">
+			<div class="px-3 dark:bg-gray-700 rounded">
+				<input type="checkbox" class="dark:accent-blue-700 accent-sky-300" checked?={ todo.Done } name="done"/>
 				<input type="text" name="title" value={ todo.Title } placeholder="Something interesting..." class="bg-transparent p-1 "/>
+				<button class="dark:text-gray-50 text-xl" hx-target={ fmt.Sprintf("#todoitem-%d", todo.Id) } hx-swap="outerHTML" hx-delete={ fmt.Sprintf("/todo/%d", todo.Id) }>x</button>
 			</div>
 		</form>
 	</li>

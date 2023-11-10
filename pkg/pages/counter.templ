@@ -11,7 +11,7 @@ templ Counter(count int) {
 				<div id="counter" class="mx-10">
 					{ strconv.Itoa(count) }
 				</div>
-				<button hx-put="/count/increment" hx-target="#counter" hx-swap="innterHTML" class="text-4xl">+</button>
+				<button hx-put="/count/increment" hx-target="#counter" hx-swap="innerHTML" class="text-4xl">+</button>
 			</div>
 		</div>
 	</div>
