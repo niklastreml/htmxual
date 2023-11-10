@@ -32,7 +32,22 @@ func (t *TodoHandler) View(c *gin.Context) {
 	todos := t.ts.List()
 	c.HTML(200, "", components.Layout(pages.TodoList(todos)))
 }
-func (t *TodoHandler) Add(c *gin.Context) {}
+func (t *TodoHandler) Add(c *gin.Context) {
+	if err := c.Request.ParseForm(); err != nil {
+		c.AbortWithError(400, err)
+		return
+	}
+
+	title := c.Request.FormValue("title")
+	todo := services.Todo{
+		Title: title,
+	}
+
+	id := t.ts.Add(todo)
+	todo.Id = id
+	c.HTML(200, "", pages.TodoItem(&todo))
+}
+
 func (t *TodoHandler) Update(c *gin.Context) {
 	if err := c.Request.ParseForm(); err != nil {
 		c.AbortWithError(400, err)

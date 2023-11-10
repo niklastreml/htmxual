@@ -13,11 +13,7 @@ type Todo struct {
 
 func NewTodoService() *TodoService {
 	return &TodoService{
-		todos: map[int]*Todo{
-			1: {Id: 1, Title: "Buy milk", Done: false},
-			2: {Id: 2, Title: "Buy eggs", Done: false},
-			3: {Id: 3, Title: "Buy bread", Done: true},
-		},
+		todos: map[int]*Todo{},
 	}
 }
 

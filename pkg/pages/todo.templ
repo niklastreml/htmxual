@@ -5,19 +5,22 @@ import "fmt"
 
 templ TodoList(todos []*services.Todo) {
 	<h1>Todo List</h1>
-	<ul>
+	<ul id="todolist">
 		for _, todo := range todos {
-			<li>
-				@TodoItem(todo)
-			</li>
+			@TodoItem(todo)
 		}
 	</ul>
-	<button>Add Todo </button>
+	<form hx-post="/todo" hx-trigger="submit" hx-swap="beforeend" hx-target="#todolist" onsubmit="event.preventDefault()">
+		<input type="text" name="title" placeholder="Title"/>
+		<button>Add Todo </button>
+	</form>
 }
 
 templ TodoItem(todo *services.Todo) {
-	<form hx-put={ fmt.Sprintf("/todo/%d", todo.Id) } id={ fmt.Sprintf("todoitem-%d", todo.Id) } hx-trigger={ fmt.Sprintf("change from:#todoitem-%d > input",todo.Id) }>
-		<input type="checkbox" checked?={ todo.Done } name="done"/>
-		<input type="text" name="title" value={ todo.Title }/>
-	</form>
+	<li>
+		<form hx-put={ fmt.Sprintf("/todo/%d", todo.Id) } id={ fmt.Sprintf("todoitem-%d", todo.Id) } hx-trigger="change once" onsubmit="event.preventDefault()">
+			<input type="checkbox" checked?={ todo.Done } name="done"/>
+			<input type="text" name="title" value={ todo.Title }/>
+		</form>
+	</li>
 }
