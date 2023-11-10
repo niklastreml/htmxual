@@ -3,10 +3,16 @@ package pages
 import "strconv"
 
 templ Counter(count int) {
-	<div>
-		<h1>Counter</h1>
-		<p>Count: <span id="counter">{ strconv.Itoa(count) }</span></p>
-		<button hx-put="/count/increment" hx-target="#counter" hx-swap="innterHTML">Increment</button>
-		<button hx-put="/count/decrement" hx-target="#counter" hx-swap="innerHTML">Decrement</button>
+	<div class="flex justify-around">
+		<div class="flex justify-center flex-col">
+			<h1 class="text-6xl mb-10 mt-1 text-center">Counter</h1>
+			<div class="text-9xl text-center flex align-center justify-between">
+				<button hx-put="/count/decrement" hx-target="#counter" hx-swap="innerHTML" class="text-4xl">-</button>
+				<div id="counter" class="mx-10">
+					{ strconv.Itoa(count) }
+				</div>
+				<button hx-put="/count/increment" hx-target="#counter" hx-swap="innterHTML" class="text-4xl">+</button>
+			</div>
+		</div>
 	</div>
 }
