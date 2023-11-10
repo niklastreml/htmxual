@@ -11,9 +11,13 @@ func main() {
 	r := gin.Default()
 	r.HTMLRender = &renderer.TemplRender{}
 
-	g := r.Group("/count")
-
+	counterGroup := r.Group("/count")
 	cs := services.NewCounterService()
-	handlers.NewCountHandler(*cs).Register(g)
+	handlers.NewCountHandler(*cs).Register(counterGroup)
+
+	todoGroup := r.Group("/todo")
+	ts := services.NewTodoService()
+	handlers.NewTodoHandler(ts).Register(todoGroup)
+
 	r.Run()
 }

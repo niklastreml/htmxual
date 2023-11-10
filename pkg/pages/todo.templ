@@ -1,0 +1,23 @@
+package pages
+
+import "githbu.com/niklastreml/htmxual/pkg/services"
+import "fmt"
+
+templ TodoList(todos []*services.Todo) {
+	<h1>Todo List</h1>
+	<ul>
+		for _, todo := range todos {
+			<li>
+				@TodoItem(todo)
+			</li>
+		}
+	</ul>
+	<button>Add Todo </button>
+}
+
+templ TodoItem(todo *services.Todo) {
+	<form hx-put={ fmt.Sprintf("/todo/%d", todo.Id) } id={ fmt.Sprintf("todoitem-%d", todo.Id) } hx-trigger={ fmt.Sprintf("change from:#todoitem-%d > input",todo.Id) }>
+		<input type="checkbox" checked?={ todo.Done } name="done"/>
+		<input type="text" name="title" value={ todo.Title }/>
+	</form>
+}
