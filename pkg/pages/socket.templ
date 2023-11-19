@@ -1,0 +1,26 @@
+package pages
+
+import "githbu.com/niklastreml/htmxual/pkg/services"
+import "time"
+
+templ Socket(messages []services.Message) {
+	<h1>Server Sent Events</h1>
+	<ul>
+		<div id="messages" hx-ext="sse" sse-connect="/socket/subscribe" sse-swap="message">
+			@Chat(messages)
+		</div>
+	</ul>
+	<form hx-post="publish" hx-trigger="submit" hx-swap="none" class="text-black">
+		<input type="text" name="user" placeholder="User"/>
+		<input type="text" name="body" placeholder="Message"/>
+		<button type="submit">Send</button>
+	</form>
+}
+
+templ Chat(msgs []services.Message) {
+	for _, msg := range msgs {
+		<li>
+			<span class="">{ msg.Timestamp.Format(time.TimeOnly) }</span> <span class="text-bold">{ msg.User }</span>: { msg.Body }
+		</li>
+	}
+}

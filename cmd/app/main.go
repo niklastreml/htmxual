@@ -23,5 +23,9 @@ func main() {
 	bas := services.BasicAuthService()
 	handlers.NewBasicAuthHandler(bas).Register(basicAuthGroup)
 
+	socketGroup := r.Group("/socket")
+	ss := services.NewSocketService()
+	handlers.NewSocketHandler(ss).Register(socketGroup)
+
 	r.Run()
 }
