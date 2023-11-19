@@ -11,14 +11,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func NewSocketHandler(ss *services.SocketService) *SocketHandler {
+func NewSseHandler(ss *services.SseService) *SocketHandler {
 	return &SocketHandler{
 		ss: ss,
 	}
 }
 
 type SocketHandler struct {
-	ss *services.SocketService
+	ss *services.SseService
 }
 
 func (sh *SocketHandler) Register(r *gin.RouterGroup) {

@@ -1,14 +1,26 @@
 # htmxual ✨
+
 htmxual is a demonstration application for building frontends without JavaScript. It utilizes [Go Gin](https://github.com/gin-gonic/gin) as the web server, [Templ](https://github.com/a-h/templ) (a library for JSX-style templating in Go), and [HTMX](https://github.com/bigskysoftware/htmx) in the frontend. 🚀
 
-The application showcases a simple counter example accessible via /count/ and a todo list example on /todo/. 📝
+There are multiple examples included:
+
+- /count shows a basic counter implemented without JavaScript.
+- /todo demonstrates a simple todo list.
+- /sse shows a simple chat application using server-sent events.
+- /secure shows a simple login form with a protected page using basic auth
 
 ## Features 🌟
+
 Counter Example: Visit /count/ to see a basic counter implemented without using JavaScript.
 
 Todo List Example: Access /todo/ to explore a simple todo list demonstration.
 
+Server-Sent Events: Visit /sse/ to see a simple chat application using server-sent events.
+
+Secure Login: Access /secure/ to see a simple login form with a protected page using basic auth.
+
 ## Technologies Used 💻
+
 Go Gin: Web framework used for the backend.
 
 Templ: Library for JSX-style templating in Go.
@@ -16,9 +28,11 @@ Templ: Library for JSX-style templating in Go.
 HTMX: Used in the frontend to enable interactions without traditional JavaScript.
 
 ## Getting Started 🏁
+
 To get the project up and running locally, follow these steps:
 
 ## Prerequisites: Ensure you have Go installed. ✅
+
 Clone the Repository: `git clone https://github.com/niklastreml/htmxual.git`
 
 Navigate to the Directory: `cd htmxual`
@@ -37,18 +51,18 @@ Make sure you have Go installed on your machine.
 
 ### Installation 🛠️
 
-1. Install Air by running: 
-    ```
-    go get -u github.com/cosmtrek/air
-    ```
+1. Install Air by running:
+   ```
+   go get -u github.com/cosmtrek/air
+   ```
 
 ### Starting the Application 🚀
 
 1. Once Air is installed, navigate to the project directory.
 2. In your terminal, run the following command:
-    ```
-    air
-    ```
+   ```
+   air
+   ```
 3. Air will watch for file changes and automatically rebuild and restart the server.
 
 4. Access the application by opening your browser and going to `http://localhost:8080/`.
