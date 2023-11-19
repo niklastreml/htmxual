@@ -19,5 +19,9 @@ func main() {
 	ts := services.NewTodoService()
 	handlers.NewTodoHandler(ts).Register(todoGroup)
 
+	basicAuthGroup := r.Group("/basic")
+	bas := services.BasicAuthService()
+	handlers.NewBasicAuthHandler(bas).Register(basicAuthGroup)
+
 	r.Run()
 }

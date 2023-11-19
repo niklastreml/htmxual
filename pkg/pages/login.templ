@@ -1,0 +1,11 @@
+package pages
+
+templ Login() {
+	<h1>Auth</h1>
+	<p>Auth page</p>
+	<form action="/basic/login" class="text-black" method="POST">
+		<input type="text" name="user" placeholder="Username"/>
+		<input type="password" name="pass" placeholder="Password"/>
+		<input type="submit" value="Login"/>
+	</form>
+}
